@@ -4,7 +4,7 @@
  * @Author: Eureka
  * @Date: 2020-06-18 18:59:46
  * @LastEditors: Eureka
- * @LastEditTime: 2020-06-28 09:55:20
+ * @LastEditTime: 2020-07-07 11:30:48
 --> 
 <template>
   <ArticleList :show-list="showList" :total-count = "totalCount" :changeList="getHomeArticleList"></ArticleList>

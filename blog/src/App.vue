@@ -4,14 +4,14 @@
  * @Author: Eureka
  * @Date: 2020-06-18 11:20:05
  * @LastEditors: Eureka
- * @LastEditTime: 2020-06-20 11:21:57
+ * @LastEditTime: 2020-07-07 13:04:33
 --> 
 <template>
   <div id="app">
     <Header></Header>
     <MainContent>   
     </MainContent>
-    <Footer></Footer>
+    <Footer class="footer"></Footer>
   
   </div>
 </template>
@@ -35,5 +35,8 @@ export default {
 <style>
 
  @import "./assets/css/base.css"; 
+.footer{
+  margin-top:20px;
+}
   
 </style>

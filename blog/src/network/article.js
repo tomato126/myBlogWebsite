@@ -4,7 +4,7 @@
  * @Author: Eureka
  * @Date: 2020-06-23 12:57:13
  * @LastEditors: Eureka
- * @LastEditTime: 2020-07-05 16:47:51
+ * @LastEditTime: 2020-07-07 11:33:10
  */ 
 import { request } from "./request";
 //所有文章页面
@@ -52,6 +52,16 @@ export function getArticleByCategory(categoryId) {
   return request({
     url:'/category/getArticleByCategory',
     params: {
+      categoryId,
+    }
+  })
+}
+
+export function getCategoryArticleList(page,categoryId) {
+  return request({
+    url:'/category/getCategoryArticleList',
+    params:{
+      page,
       categoryId
     }
   })

@@ -4,7 +4,7 @@
  * @Author: Eureka
  * @Date: 2020-06-24 15:00:00
  * @LastEditors: Eureka
- * @LastEditTime: 2020-07-05 10:38:11
+ * @LastEditTime: 2020-07-07 11:33:35
  */ 
 var dbConfig = require('../utils/dbconfig');
 
@@ -45,7 +45,29 @@ getArticleByCategory = (req,res) => {
   dbConfig.sqlConnect(sql, sqlArr, callBack) 
 }
 
+
+//根据分类id获取文章列表并分页
+getCategoryArticleList = (req, res) => {
+  let {page ,categoryId} = req.query;
+  console.log(categoryId)
+  console.log(page)
+  var sql = "select * from article where category =(select name from category where id =" + categoryId + ")" + "limit " + (page - 1) * 3 + ',' + '3' ;
+  var sqlArr = []
+  var callBack = (err, data) => {
+    if (err) {
+      console.log('连接出错了__根据分类id获取文章列表并分页')
+    } else {
+      res.send({
+        'data': data
+      })
+    }
+  }
+
+  dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+
 module.exports = {
   getCategoryNum,
-  getArticleByCategory
+  getArticleByCategory,
+  getCategoryArticleList
 }

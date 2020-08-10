@@ -4,7 +4,7 @@
  * @Author: Eureka
  * @Date: 2020-06-18 18:54:52
  * @LastEditors: Eureka
- * @LastEditTime: 2020-06-27 16:15:44
+ * @LastEditTime: 2020-07-07 13:46:40
 --> 
 <template>
   <div>
@@ -20,7 +20,10 @@
              <li class="art-detail-item" v-for="(list,listIndex) in returnArtList(archiveList.list,item)" :key="listIndex">
               <span class="date">{{list.postdata}}</span>
               <router-link :to="`/article/${list.id}`">{{list.artTitle}}</router-link>
-              <span class="views">{{list.viewNumber}}</span>
+              <span class="views">
+                <i class="iconfont">&#xe607;</i>
+                {{list.viewNumber}}
+              </span>
             </li>
           </ul>
         </div>
@@ -31,6 +34,7 @@
 
 <script>
 import {getArchive} from "../../network/article"
+ import "../../assets/iconfont/iconfont.css"
   export default {
      name: "Archive",
      data() {
@@ -80,7 +84,7 @@ import {getArchive} from "../../network/article"
       },
       returnArtList(obj,date){
         return obj[date]
-      }
+      },
      }
 
   }
@@ -107,7 +111,7 @@ import {getArchive} from "../../network/article"
         font-size: 13px;
   }
   .year{
-    width: 60%;
+    width: 100%;
   }
   .el-divider__text{
             font-size: 20px;

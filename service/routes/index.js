@@ -4,7 +4,7 @@
  * @Author: Eureka
  * @Date: 2020-06-22 10:07:45
  * @LastEditors: Eureka
- * @LastEditTime: 2020-07-05 16:07:32
+ * @LastEditTime: 2020-07-07 10:33:30
  */ 
 var express = require('express');
 var router = express.Router();
@@ -27,6 +27,8 @@ var categoryController = require('../controllers/categoryController')
 router.get('/fronted/category/getCategoryNum',categoryController.getCategoryNum)
 //根据分类名获取文章
 router.get('/fronted/category/getArticleByCategory',categoryController.getArticleByCategory)
+
+router.get('/fronted/category/getCategoryArticleList',categoryController.getCategoryArticleList)
 
 //tag
 var tagController = require('../controllers/TagController')

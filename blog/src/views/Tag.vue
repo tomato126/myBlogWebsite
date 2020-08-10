@@ -12,7 +12,7 @@
       <p class="type-title">与<span>{{this.showList[0].tag}}</span>标签相关的文章</p>
       <p class="type-total">共有<span>{{totalCount || 0}}</span>篇</p>
     </section>
-    <list :show-list="showList" :total-count = "totalCount"></list>
+    <list :show-list="showList" :total-count = "totalCount" :changeList="getTagArticleList"></list>
   </article>
 </template>
 
