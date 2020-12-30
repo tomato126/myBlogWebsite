@@ -20,6 +20,13 @@ router.get('/fronted/article/getArchive',articleController.getArchive)
 //获取详情页数据
 router.get('/fronted/article/getDetail', articleController.getArticleDetail)
 
+//新增文章
+router.post('/fronted/article/add', articleController.addArticle)
+//编辑文章
+router.post('/fronted/article/edit', articleController.editArticle)
+//删除文章
+router.post('/fronted/article/delete', articleController.deleteArticle)
+
 
 //category
 var categoryController = require('../controllers/categoryController')

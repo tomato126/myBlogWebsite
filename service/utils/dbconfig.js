@@ -12,7 +12,7 @@ module.exports = {
   //数据库配置
   config:{
     host:'localhost',
-    port:'3307',
+    port:'3306',
     user:'Eureka',
     password:'123456',
     database:'blog'
@@ -22,7 +22,7 @@ module.exports = {
   sqlConnect:function(sql,sqlArr,callBack){
     var pool = mysql.createPool(this.config)
     pool.getConnection((err,conn) => {
-      console.log('数据库连接成功')
+      //console.log('数据库连接成功')
       if(err){
         console.log('数据库连接失败')
         return;

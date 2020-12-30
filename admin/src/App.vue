@@ -7,9 +7,9 @@
  * @LastEditTime: 2020-07-08 09:54:53
 --> 
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -21,6 +21,17 @@ export default {
 }
 </script>
 
-<style>
- @import "./assets/css/base.css"; 
-</style>
+<style lang="less">
+    @import "./assets/css/base.css";
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+    }
+    #app {
+        width: 100%;
+        height: 100%;
+    }
+</style> 
+    

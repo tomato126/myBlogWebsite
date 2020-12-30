@@ -9,27 +9,64 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Login from '../view/Login.vue'
 import Main from '../view/Main.vue'
-import ArticleAdd from '../view/ArticleAdd.vue'
+import postBlog from '../view/PostBlog.vue'
+import editBlog from '@/view/EditBlog'
+
 // 1.安装VueRouter
 Vue.use(VueRouter)
 
 // 2.配置路由信息
 const routes = [
 
-  {
-    path: '/',
-    name: 'Main',
-    redirect: '/Main'
-  },
-  {
-    path: '/Main',
-    name: 'Main',
-    component: Main,
-    children: [
-      { path: '/article/add', component: ArticleAdd}
-    ]
-  },
+	{
+		path: '/',
+		name: 'Login',
+		redirect: '/Login'
+	},
+	{
+		path: '/Login',
+		name: 'Login',
+		component: Login,
+	},
+	{
+		path: '/manage',
+		name: 'manage',
+		component: Main,
+		children: [
+			{
+				path: '/blogs',
+				name: 'blogs',
+				component: () => import('@/view/BlogManage'),
+			},
+			{
+				path: '/categories',
+				name: 'categories',
+				component: () => import('@/view/CategoriesManage'),
+			},
+			{
+				path: '/tags',
+				name: 'tags',
+				component: () => import('@/view/TagsManage'),
+			},
+			{
+				path: '/albums',
+				name: 'albums',
+				component: () => import('@/view/AlbumsManage'),
+			},
+			{
+				path: '/postBlog',
+				name: 'postBlog',
+				component: postBlog,
+			},
+			{
+				path: '/editBlog',
+				name: 'editBlog',
+				component: editBlog
+			}
+		]
+	},
 ]
 
 // 3.创建路由对象
