@@ -8,7 +8,7 @@
                     v-for="item in categoryList"
                     :key="item.id"
                     :label="item.name"
-                    :value="item.id">
+                    :value="item.name">
                 </el-option>
             </el-select>
             <el-button type="primary" style="margin-left: 10px;" v-if="false">保存</el-button>
@@ -49,7 +49,7 @@ export default {
            this.$router.go(-1)
         },
         postBlog () {
-            //console.log(this.value)
+            console.log(this.category)
 
             if (this.value == '') {
                 this.$message({message: '文章内容为空！！！', type: 'warning'})
@@ -66,7 +66,6 @@ export default {
                 id: getPostId(),
                 title: this.title,
                 category: this.category,
-                tag: 'js',
                 _posts: this.value,
                 postDate: getDate(),
                 viewNumber: 1,

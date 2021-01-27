@@ -20,10 +20,6 @@
              <li class="art-detail-item" v-for="(list,listIndex) in returnArtList(archiveList.list,item)" :key="listIndex">
               <span class="date">{{list.postdata}}</span>
               <router-link :to="`/article/${list.id}`">{{list.artTitle}}</router-link>
-              <span class="views">
-                <i class="iconfont">&#xe607;</i>
-                {{list.viewNumber}}
-              </span>
             </li>
           </ul>
         </div>
@@ -52,7 +48,6 @@ import {getArchive} from "../../network/article"
            const archiveCount = res.data.length;
            function getDateArr(arr) {
                 let year_obj = {};
-                console.log(111)
                 for (var i = 0, len = arr.length; i < len; i++) {
                     let Year_index = arr[i].postdata.indexOf('-');
                     let year_date = arr[i].postdata.substr(0, Year_index);
@@ -71,7 +66,6 @@ import {getArchive} from "../../network/article"
               total: archiveCount,
             }
             this.archiveList = result
-            console.log(this.archiveList)
 
          })
        },

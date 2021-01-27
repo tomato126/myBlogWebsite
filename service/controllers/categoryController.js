@@ -66,8 +66,80 @@ getCategoryArticleList = (req, res) => {
   dbConfig.sqlConnect(sql, sqlArr, callBack)
 }
 
+//获取所有分类
+getAllCategory = (req, res) => {
+    var sql = "select * from category"
+    var sqlArr = []
+    var callBack = (err, data) => {
+        if (err) {
+            console.log('出错了---获取所有分类', err)
+        } else {
+            res.send({
+                'data': data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+
+// 修改分类名
+modifyCategoryName = (req, res) => {
+    let query = req.body
+    var sql = `update blog.category set name = (?) where id = (?)`
+    var sqlArr = [ query.name ,query.id];
+    var callBack = (err, data) => {
+        if (err) {
+            res.send({
+                code: 0,
+                data: {
+                msg: '编辑失败~'
+                }
+            })
+            console.log('连接出错了__修改分类名', err)
+        } else {
+            res.send({
+                code: 1,
+                data: {
+                msg: '编辑成功~'
+                }
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+
+
+//新增分类名
+addCategory = (req, res) => {
+    let query = req.body
+    var sql = `insert into blog.category (name, status) values (?,?)`
+    var sqlArr = [query.name, 1];
+    var callBack = (err, data) => {
+        if (err) {
+            res.send({
+                code: 0,
+                data: {
+                msg: '新增失败~'
+                }
+            })
+            console.log('连接出错了__新增分类名', err)
+        } else {
+            res.send({
+                code: 1,
+                data: {
+                msg: '新增分类名成功~'
+                }
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+
 module.exports = {
   getCategoryNum,
   getArticleByCategory,
-  getCategoryArticleList
+  getCategoryArticleList,
+  getAllCategory,
+  modifyCategoryName,
+  addCategory
 }

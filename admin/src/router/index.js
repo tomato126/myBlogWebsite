@@ -46,11 +46,6 @@ const routes = [
 				component: () => import('@/view/CategoriesManage'),
 			},
 			{
-				path: '/tags',
-				name: 'tags',
-				component: () => import('@/view/TagsManage'),
-			},
-			{
 				path: '/albums',
 				name: 'albums',
 				component: () => import('@/view/AlbumsManage'),

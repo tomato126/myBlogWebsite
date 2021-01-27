@@ -14,7 +14,6 @@ const Archive = () => import('../views/archive/Archive')
 const Code = () => import('../views/code/Code')
 const About = () => import('../views/about/About')
 const Category = () => import('../views/Category')
-const Tag = () => import('../views/Tag.vue')
 const articleDetail = () => import('../views/articleDetail.vue')
 
 // 1.安装VueRouter
@@ -52,11 +51,6 @@ const routes = [
     path: '/category/:category',
     name:'Category',
     component: Category
-  },
-  {
-    path: '/tag/:tag',
-    name: 'Tag',
-    component: Tag
   },
   {
     path: '/article/:id',

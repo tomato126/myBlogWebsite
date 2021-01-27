@@ -16,8 +16,6 @@
         </div>
         <div class="post_meta">
           <span>{{article.postdata}}</span>
-          <i class="iconfont">&#xe607;</i>
-          <span>{{article.viewNumber}}</span>
           <i class="iconfont">&#xe600;</i>
           <span>{{article.category}}</span>
         </div>

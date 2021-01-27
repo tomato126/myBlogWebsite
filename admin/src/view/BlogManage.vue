@@ -1,20 +1,20 @@
 <template>
     <div class="blog-wrapper">
         <div class="blog-header">
-            <el-input placeholder="标题" v-model="inputVal" clearable style="width: 200px; margin-right: 10px"></el-input>
+            <el-input placeholder="标题" v-model="title" clearable style="width: 200px; margin-right: 10px"></el-input>
             <el-select v-model="value" placeholder="分类" clearable>
                 <el-option
                     v-for="item in categoryList"
                     :key="item.id"
                     :label="item.name"
-                    :value="item.id">
+                    :value="item.name">
                 </el-option>
             </el-select>
-            <el-button type="primary" style="margin-left: 10px;">搜索</el-button>
+            <el-button type="primary" style="margin-left: 10px;" @click="search">搜索</el-button>
             <el-button type="primary" style="margin-left: 10px;" @click="writeArtical">写文章</el-button>
         </div>
         <div class="blog-table">
-            <BlogTable />
+            <BlogTable :queryTitle="title" :queryCategory="value" ref="blogTable"/>
         </div>
     </div>
 </template>
@@ -28,9 +28,14 @@ export default {
     },
     data() {
         return {
-            inputVal: '',
+            title: '',
             value: '',
             categoryList: []
+        }
+    },
+    watch: {
+        value () {
+            this.search()
         }
     },
     created () {
@@ -47,6 +52,9 @@ export default {
         },
         writeArtical () {
             this.$router.push('/postBlog')
+        },
+        search () {
+            this.$refs.blogTable.getTableData()
         }
     },
 }

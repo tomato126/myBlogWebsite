@@ -35,6 +35,9 @@ export default {
     line-height: 60px;
     z-index: 9999;
     box-shadow: 0 0px 1px #999;
+    position: fixed;
+    top: 0;
+    padding-bottom: 60px;
 }
 .nav_between{
   width:70%;

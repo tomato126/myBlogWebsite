@@ -26,6 +26,8 @@ router.post('/fronted/article/add', articleController.addArticle)
 router.post('/fronted/article/edit', articleController.editArticle)
 //删除文章
 router.post('/fronted/article/delete', articleController.deleteArticle)
+//根据条件查询文章
+router.post('/fronted/article/getArticleByQuery', articleController.getArticleByQuery)
 
 
 //category
@@ -37,12 +39,13 @@ router.get('/fronted/category/getArticleByCategory',categoryController.getArticl
 
 router.get('/fronted/category/getCategoryArticleList',categoryController.getCategoryArticleList)
 
-//tag
-var tagController = require('../controllers/TagController')
-//获取数据库标签的名字列表
-router.get('/fronted/tag/getTagName',tagController.getTagName)
-//根据标签获取文章
-router.get('/fronted/tag/getArticleByTag',tagController.getArticleByTag)
+//获取所有分类
+router.get('/fronted/category/getAllCategory', categoryController.getAllCategory)
+//修改分类名
+router.post('/fronted/category/modify', categoryController.modifyCategoryName)
+//新增分类名
+router.post('/fronted/category/add', categoryController.addCategory)
+
 
 
 module.exports = router;

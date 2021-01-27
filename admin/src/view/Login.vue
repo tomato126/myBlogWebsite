@@ -24,7 +24,17 @@ export default {
     },
     methods: {
         login () {
-            this.$router.push('/manage') //TODO 这样直接输入对应的路由就能直接跳过登录
+            if (this.inputAccount == '' || this.inputPassword == '') {
+                this.$message({message: '账号或密码为空！！！', type: 'warning'})
+                return
+            }
+
+            if (this.inputAccount == 'Eureka' && this.inputPassword == '123456') {
+                this.$router.push('/manage') //TODO 这样直接输入对应的路由就能直接跳过登录
+            } else {
+                this.$message({message: '账号或密码错误！！！', type: 'warning'})
+                return
+            }
         }
     },
 }

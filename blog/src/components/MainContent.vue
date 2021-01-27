@@ -34,6 +34,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 70%;
+  margin-top: 60px;
  }
   .main-left{
     flex: 1;

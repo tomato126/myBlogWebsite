@@ -8,11 +8,11 @@
                     v-for="item in categoryList"
                     :key="item.id"
                     :label="item.name"
-                    :value="item.id">
+                    :value="item.name">
                 </el-option>
             </el-select>
             <el-button type="primary" style="margin-left: 10px;" v-if="false">保存</el-button>
-            <el-button type="primary" style="margin-left: 10px;" @click="saveBlog">发布</el-button>
+            <el-button type="primary" style="margin-left: 10px;" @click="saveBlog">保存</el-button>
         </div>
         <mavon-editor v-model="value" style="height: 500px; margin-top: 25px"/>
     </div>

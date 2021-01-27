@@ -5,12 +5,11 @@
                 class="el-menu-main" 
                 mode="horizontal"
                 active-text-color="#000"
-                router>
-                <el-menu-item index="/blogs">文章管理
-                    <router-link to="/manage/blogs"></router-link>
-                </el-menu-item>
+                router
+                :default-active="activeItem"
+                >
+                <el-menu-item index="/blogs">文章管理</el-menu-item>
                 <el-menu-item index="/categories">分类管理</el-menu-item>
-                <el-menu-item index="/tags">标签管理</el-menu-item>
                 <el-menu-item index="/albums">相册管理</el-menu-item>
                 </el-menu>
         </header>
@@ -25,6 +24,20 @@ export default {
     name: 'Main',
     data() {
         return {
+        }
+    },
+    computed: {
+        activeItem () {
+            if (this.$route.fullPath == '/manage') {
+                return '/blogs'
+            } else {
+                return this.$route.fullPath
+            }
+        }
+    },
+    created () {
+        if (this.$route.fullPath == '/manage') {
+            this.$router.push('/blogs')
         }
     },
     methods: {
@@ -43,7 +56,7 @@ export default {
         overflow: hidden;
     }
     .el-menu {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.4);
         border: none !important;
     }
     .manage-content {

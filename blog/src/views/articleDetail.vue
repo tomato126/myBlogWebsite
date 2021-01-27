@@ -9,10 +9,9 @@
 <template>
   <article class="article_id">
     <section>
-       <h2 class="article-title" v-if="article.artTitle">{{article.artTitle}}</h2>
+       <h2 class="article-title">{{article ? article.artTitle : ''}}</h2>
        <p class="article-info">
-         <span>发布于：{{article.postdata}}</span>
-         <span>{{article.viewNumber}}次浏览</span>
+         <span>发布于：{{article ? article.postdata : ''}}</span>
        </p>
     </section>
     <section class="article-content markdown-body">
@@ -53,13 +52,12 @@
        getArticleDetail(articleId) {
          getArticleDetail(articleId).then( res => {
            this.article = res.data[0]
-           console.log(res.data[0])
          })
        }
      },
      computed: {
        markdownRender() {
-        let mdStr = this.article.content
+        let mdStr = this.article ? this.article.content : ''
         return mdRender(mdStr)
       },
      }

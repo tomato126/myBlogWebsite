@@ -9,7 +9,7 @@
 <template>
   <article class="categoryname">
     <section class="artList-by-type">
-      <p class="type-title">归类在<span>{{this.showList[0].category}}</span>下的文章</p>
+      <p class="type-title">归类在<span>{{showList[0] ? showList[0].category : ''}}</span>下的文章</p>
       <p class="type-total">共有<span>{{totalCount || 0}}</span>篇</p>
     </section>
     <list :show-list="showList" :total-count = "totalCount" :changeList="getCategoryArticleList"></list>
@@ -49,7 +49,6 @@
        getCategoryArticleList(PageIndex=1,CategoryID){
          CategoryID = this.CategoryID;
          getCategoryArticleList(PageIndex,CategoryID).then(res => {
-           console.log(PageIndex)
            this.showList = res.data
          })
        },

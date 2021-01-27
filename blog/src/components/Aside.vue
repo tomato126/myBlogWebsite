@@ -8,14 +8,11 @@
 --> 
 <template>
   <aside>
-    <!--标签-->
+    <!-- 联系我 -->
     <section >
-      <h4>FEATURED TAGS</h4>
-      <div class="tags">
-        <router-link :to="`/tag/${item.id}`"   
-                     tag="a"
-                     v-for="(item,index) in tagList"
-                     :key="index">{{item.name}}</router-link>
+      <h4>CONTACT ME</h4>
+      <div>
+        <img src="../assets/images/headerImg.jpg"/>
       </div>
     </section>
     <!-- 分类 -->
@@ -29,21 +26,12 @@
         <span class="right">共{{item.times}}篇</span>
       </router-link>
     </section>
-     <!-- 联系我 -->
-    <section >
-      <h4>CONTACT ME</h4>
-      <div>
-        <img src="../assets/images/headerImg.jpg"/>
-      </div>
-    </section>
-    
   </aside>
 </template>
 
 
 <script>
   import {getCategoryNum} from '../network/article'
-  import {getTagName} from '../network/article'
 
   export default {
      name: "Aside",
@@ -55,21 +43,13 @@
      },
      created(){
        this.getCategoryNum()
-       this.getTagName()
      },
      methods:{
        getCategoryNum(){
          getCategoryNum().then(res => {
            this.categoryList = res.data
-           //console.log(this.categoryList)
          })
        },
-       getTagName(){
-         getTagName().then(res => {
-           this.tagList = res.data
-           //console.log(this.tagList)
-         })
-       }
      }
   }
 </script>
@@ -81,9 +61,11 @@
    
  }
  section {
-    border-top:1px solid #eee;
     padding-top:20px;
     padding-bottom: 20px;
+ }
+ .category {
+    border-top:1px solid #eee;
  }
  h4{
    padding-bottom: 20px;

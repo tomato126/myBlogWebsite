@@ -29,7 +29,7 @@ getArticleList = (req, res) => {
 getHomeArticleList = (req,res) =>{
   let {page} = req.query;
   
-  var sql = "select id,artTitle,category,content,date_format( postdata, '%Y-%m-%d' ) AS postdata,viewNumber from article ORDER BY postdata DESC limit " + (page - 1) * 3 + ',' + '3';
+  var sql = "select id,artTitle,category,content,date_format( postdata, '%Y-%m-%d' ) AS postdata,viewNumber from article ORDER BY postdata DESC limit " + (page - 1) * 10 + ',' + '10';
   var sqlArr = [];
   var callBack = (err, data) => {
     if (err) {
@@ -64,7 +64,7 @@ getArchive = (req, res) => {
 //获取文章详情
 getArticleDetail = (req,res) => {
   let { id } = req.query;
-  var sql = "select id,artTitle,category,tag,content,date_format( postdata, '%Y-%m-%d' ) AS postdata,viewNumber from article where id="+id;
+  var sql = "select id,artTitle,category,content,date_format( postdata, '%Y-%m-%d' ) AS postdata,viewNumber from article where id="+id;
   var sqlArr = [];
   var callBack = (err, data) => {
     if (err) {
@@ -83,8 +83,8 @@ getArticleDetail = (req,res) => {
 addArticle = (req, res) => {
     let query = req.body
     //console.log(query)
-    var sql = `insert into blog.article ( category, content, viewNumber, id, status, tag, artTitle, postdata) values (?,?,?,?,?,?,?,?)`
-    var sqlArr = [query.category, query.content, query.viewNumber, query.id, query.status, query.tag, query.artTitle, query.postdata];
+    var sql = `insert into blog.article ( category, content, viewNumber, id, status, artTitle, postdata) values (?,?,?,?,?,?,?)`
+    var sqlArr = [query.category, query.content, query.viewNumber, query.id, query.status, query.artTitle, query.postdata];
     var callBack = (err, data) => {
         if (err) {
             res.send({
@@ -111,8 +111,8 @@ dbConfig.sqlConnect(sql, sqlArr, callBack)
 editArticle = (req, res) => {
     let query = req.body
     //console.log(query)
-    var sql = `update blog.article set category = (?), content = (?), viewNumber = (?), status = (?), tag = (?), artTitle = (?), postdata = (?) where id = (?)`
-    var sqlArr = [query.category, query.content, query.viewNumber, query.status, query.tag, query.artTitle, query.postdata, query.id];
+    var sql = `update blog.article set category = (?), content = (?), viewNumber = (?), status = (?), artTitle = (?), postdata = (?) where id = (?)`
+    var sqlArr = [query.category, query.content, query.viewNumber, query.status, query.artTitle, query.postdata, query.id];
     var callBack = (err, data) => {
         if (err) {
             res.send({
@@ -161,6 +161,42 @@ deleteArticle = (req, res) => {
     dbConfig.sqlConnect(sql, sqlArr, callBack)
 }
 
+//根据查询条件获取文章
+getArticleByQuery = (req, res) => {
+  let query = req.body
+  let pageIndex = (query.page - 1) * query.pageSize
+
+  var sql = `select * from article where artTitle like ? and category like ? order by postdata desc limit ?,?`
+  var sqlArr = ["%" + query.title + "%", "%" + query.category + "%", pageIndex, Number(query.pageSize)]
+
+  // count sql语句
+  var countSql = "select count(1) as count from article where artTitle like ? and category like ?"
+  var countArr = ["%" + query.title + "%", "%" + query.category + "%"]
+
+  dbConfig.sqlConnect(countSql, countArr, (err,countRes) => {
+    let total = countRes[0].count
+    console.log(countRes)
+    dbConfig.sqlConnect(sql, sqlArr, (err, data) => {
+      //console.log(res)
+      if (err) {
+        console.log(err)
+        res.send({
+          code: 0,
+          msg: '分页查询失败'
+        })
+      } else {
+        res.send({
+          code: 1,
+          data: {
+            list: data
+          },
+          total: total
+        })
+      }
+    })
+  })
+}
+
 module.exports = {
   getArticleList,
   getHomeArticleList,
@@ -168,5 +204,6 @@ module.exports = {
   getArticleDetail,
   addArticle,
   editArticle,
-  deleteArticle
+  deleteArticle,
+  getArticleByQuery
 }

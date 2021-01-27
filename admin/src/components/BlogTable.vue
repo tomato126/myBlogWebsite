@@ -3,9 +3,8 @@
     <div>
         <el-table :data="tableData" style="width: 100%" border  height="440">
             <el-table-column prop="id" label="ID" width="100"></el-table-column>
-            <el-table-column prop="artTitle" label="标题" width="300"></el-table-column>
+            <el-table-column prop="artTitle" label="标题" width="360"></el-table-column>
             <el-table-column prop="category" label="分类"></el-table-column>
-            <el-table-column prop="tag" label="标签"></el-table-column>
             <el-table-column prop="postdata" label="发布时间"></el-table-column>
             <el-table-column prop="operation" label="操作" width="100">
                 <template slot-scope="scope">
@@ -14,6 +13,17 @@
                 </template>
             </el-table-column>
         </el-table>
+        <div class="pagination" style="background: #fff">
+            <el-pagination
+                background
+                @current-change="handleCurrentChange"
+                :current-page.sync="pageNo"
+                :page-size="pageSize"
+                layout="total, prev, pager, next"
+                :total="total">
+                </el-pagination>
+        </div>
+        
     </div>
 </template>
 
@@ -22,9 +32,16 @@ import * as service from '@/network/article'
 
 export default {
     name: "BlogHome",
+    props: {
+        queryTitle: {},
+        queryCategory: {}
+    },
     data() {
         return {
-            tableData: []
+            tableData: [],
+            total: 0,
+            pageNo: 1,
+            pageSize: 10
         }
     },
     created() {
@@ -35,8 +52,10 @@ export default {
             this.getTableData()
         },
         getTableData () {
-            service.getHomeArticleList().then(res => {
-                this.tableData = res.data
+            let params = {title: this.queryTitle, category: this.queryCategory, page: this.pageNo, pageSize: this.pageSize}
+            service.getHomeArticleList(params).then(res => {
+                this.tableData = res.data.list
+                this.total = res.data.total
             })
         },
         editBlog (rowInfo) {
@@ -57,6 +76,10 @@ export default {
                     this.$message({message: res.data.msg, type: 'error'})
                 }
             })
+        },
+        handleCurrentChange (page) {
+            this.pageNo = page
+            this.getTableData()
         }
     },
 };
